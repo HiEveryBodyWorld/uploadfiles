@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/sweetalert.css" />
+</head>
+<body>
+<form enctype="multipart/form-data" method="post" name="fileinfo">
+<div >
+            <input type="file" class="form-control" id="upload_file" name="upload_file"
+                   style="display: none;"  multiple>
+            <input type="text" class="form-control" id="upload_file_tmp" name="upload_file_tmp" style="float:left;width: 50%;"
+                   readonly="readonly" onclick="upload_file.click(); ">
+            <button type="button" class="btn btn-primary" id="select_file" style="float:left;width: 10%;"
+                    onclick="upload_file.click();">选择附件
+            </button>
+        </div>
+        <div style="width:60%">
+        <span class="record-number">支持上传文件格式:txt, pdf,doc,docx,xls,xlsx,png,jpg,dcm,zip,rar,bmp,7zip,jpeg.</span>
+        <span class="record-number">上传文件数量:5</span>
+        <span class="record-number">上传文件大小:10M(单个)</span>
+        </div>
+</form>
+
+<script type="text/javascript" src="js/jquery/1.9.1/jquery.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/sweetalert-dev.js"></script>
+<script type="text/javascript" src="js/uploadfiles.js" charset="GBK"></script>
+
+<script type="text/javascript">
+
+    $(function(){
+
+        $('#upload_file').change(function(){
+
+            var files = document.getElementById("upload_file").files;
+            var formData = new FormData();
+            $.each(files, function (data) {
+                formData.append("file", data);
+            })
+            formData.append("id",5);//可以扩展，新增别的字段formData.append("name","张三");
+
+            changeFiles({
+                'files':files,
+                'url':'http://localhost:8081/',
+                'formData':formData
+
+            });
+        });
+
+    });
+</script>
+
+</body>
+</html>
